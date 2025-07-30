@@ -268,10 +268,11 @@ Mobile Responsiveness
 
 ## Setup from scatch
 
-npm create vite@latest kingliving
-
-- Select React
-- Select Typescript
+```
+  npm create vite@latest kingliving
+  - Select React
+  - Select Typescript
+```
 
 ```
   cd kingliving
