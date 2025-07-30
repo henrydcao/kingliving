@@ -1,6 +1,6 @@
-## All AI prompts you used to build the POC (exact wording)
+# All AI prompts you used to build the POC (exact wording)
 
-# Prompt 1:
+## Prompt 1:
 
 File: `src/types/Customer.ts`
 Define a Region type with 'APAC', 'UK', 'US' values and a Customer interface containing:
@@ -32,7 +32,7 @@ Define OrderStatus type with 'Pending', 'Processing', 'Shipped', 'Delivered', 'C
 
 ---
 
-# Prompt 2:
+## Prompt 2:
 
 File: `src/data/generateMockCustomers.ts`
 Create generateMockCustomers function that:
@@ -65,7 +65,7 @@ Create generateMockOrders function that:
 
 ---
 
-# Prompt 3:
+## Prompt 3:
 
 File: `src/hooks/useOrders.ts`
 Create useOrders hook that:
@@ -103,7 +103,7 @@ Create useDashboardStats hook that:
 
 ---
 
-# Prompt 4:
+## Prompt 4:
 
 File: `src/App.tsx`
 Create main App component that:
@@ -167,7 +167,7 @@ Create CustomerModal component that:
 
 ---
 
-# Prompt 5:
+## Prompt 5:
 
 Design Polish
 
@@ -192,7 +192,7 @@ Mobile Responsiveness
 
 ---
 
-## Your technical design decisions and reasoning
+# Your technical design decisions and reasoning
 
 1. Planned out what tech to use in the project:
 
@@ -203,12 +203,15 @@ Mobile Responsiveness
 - Use Claude CLI for faster development
 
 2.  I created a clean project structure with separation of layers:
+
+    ```
     src/
-    ├── types/ # Domain models (Customer, Order)
-    ├── data/ # Mock data generators using faker-js
-    ├── components/ # UI components (Sidebar, Table, Stats, Modal)
-    ├── hooks/ # Custom logic for filtering, lookups, stats
-    ├── App.tsx # Main entry point and layout
+      ├── types/ # Domain models (Customer, Order)
+      ├── data/ # Mock data generators using faker-js
+      ├── components/ # UI components (Sidebar, Table, Stats, Modal)
+      ├── hooks/ # Custom logic for filtering, lookups, stats
+      ├── App.tsx # Main entry point and layout
+    ```
 
 3.  I defined the data structures and how the mock data would simulate real commerce instances:
     Example:
@@ -250,35 +253,44 @@ Mobile Responsiveness
   Example:
   Function: generateCustomerId will return a random customerId result. Inside the file, I can write something like this.
 
-  function generateCustomerId(): string {
-  // TODO: generate random customerId and return customerId
-  return customerId
-  }
+  ```
+    function generateCustomerId(): string {
+      // TODO: generate random customerId and return customerId
+      return customerId
+    }
+  ```
 
   Once I am very clear about the expected outcome for each file. I can write down a draft prompt. Then ask ChatGPT to re-write the prompt in a very clear way. Next, come back to Claude Ai, paste it in, and very high chance, the code should work on the spot.
 
 ---
 
-## Setup and run instructions
+# Setup and run instructions
 
-# Setup from scatch
+## Setup from scatch
 
 npm create vite@latest kingliving
 
 - Select React
 - Select Typescript
 
-cd kingliving
-npm install
-npm install @faker-js/faker lucide-react
-npm install tailwindcss @tailwindcss/vite
+```
+  cd kingliving
+  npm install
+  npm install @faker-js/faker lucide-react
+  npm install tailwindcss @tailwindcss/vite
+```
+
 Add:
 
-`import tailwindcss from '@tailwindcss/vite'` in vite.config.ts
-`tailwindcss(),` in vite.config.ts
-`@import "tailwindcss";` in index.css file.
+```
+  `import tailwindcss from '@tailwindcss/vite'` in vite.config.ts
+  `tailwindcss(),` in vite.config.ts
+  `@import "tailwindcss";` in index.css file.
+```
 
-npm run dev
+```
+  npm run dev
+```
 
 Create project structure - folders & files:
 
@@ -308,9 +320,13 @@ In a new terminal inside same directory: `claude kingliving index` - this is to 
 
 Now, use 5 prompts as shared above
 
-# Run Instructions
+## Run Instructions
 
-git clone https://github.com/henrydcao/kingliving
-cd kingliving
-npm install
-npm run dev
+```
+  git clone https://github.com/henrydcao/kingliving
+  cd kingliving
+  npm install
+  npm run dev
+```
+
+# Any assumptions you made
