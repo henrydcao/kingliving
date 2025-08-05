@@ -2,7 +2,9 @@ import { useState } from "react";
 import { ChevronDown, User, Package, Filter } from "lucide-react";
 import type { Order } from "../types/Order";
 import type { Customer } from "../types/Customer";
+import type { DateRange } from "../types/DateRange";
 import { CustomerModal } from "./CustomerModal";
+import { DateRangeFilter } from "./DateRangeFilter";
 
 interface OrderTableProps {
   orders: Order[];
@@ -13,8 +15,10 @@ interface OrderTableProps {
   orderHooks: {
     regionFilter: string;
     statusFilter: string;
+    dateRange: DateRange;
     setRegionFilter: (filter: string) => void;
     setStatusFilter: (filter: string) => void;
+    setDateRange: (range: DateRange) => void;
   };
   isLoading: boolean;
 }
@@ -185,44 +189,58 @@ export function OrderTable({
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100">
       <div className="p-4 sm:p-6 border-b border-gray-100">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-            <Package className="h-5 w-5 mr-2 text-blue-600" />
-            Orders ({orders.length})
-          </h3>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+              <Package className="h-5 w-5 mr-2 text-blue-600" />
+              Orders ({orders.length})
+            </h3>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="relative">
-              <select
-                value={orderHooks.regionFilter}
-                onChange={(e) => orderHooks.setRegionFilter(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-300 transition-all duration-200 hover:border-gray-400"
-                style={{ minHeight: "44px" }}
-              >
-                {REGIONS.map((region) => (
-                  <option key={region} value={region}>
-                    {region === "All" ? "All Regions" : region}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
-            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative">
+                <select
+                  value={orderHooks.regionFilter}
+                  onChange={(e) => orderHooks.setRegionFilter(e.target.value)}
+                  className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-300 transition-all duration-200 hover:border-gray-400"
+                  style={{ minHeight: "44px" }}
+                >
+                  {REGIONS.map((region) => (
+                    <option key={region} value={region}>
+                      {region === "All" ? "All Regions" : region}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+              </div>
 
-            <div className="relative">
-              <select
-                value={orderHooks.statusFilter}
-                onChange={(e) => orderHooks.setStatusFilter(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-300 transition-all duration-200 hover:border-gray-400"
-                style={{ minHeight: "44px" }}
-              >
-                {STATUSES.map((status) => (
-                  <option key={status} value={status}>
-                    {status === "All" ? "All Statuses" : status}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+              <div className="relative">
+                <select
+                  value={orderHooks.statusFilter}
+                  onChange={(e) => orderHooks.setStatusFilter(e.target.value)}
+                  className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-300 transition-all duration-200 hover:border-gray-400"
+                  style={{ minHeight: "44px" }}
+                >
+                  {STATUSES.map((status) => (
+                    <option key={status} value={status}>
+                      {status === "All" ? "All Statuses" : status}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+              </div>
             </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <span className="text-sm font-medium text-gray-700 min-w-fit">
+              Date Range:
+            </span>
+            <DateRangeFilter
+              dateRange={orderHooks.dateRange}
+              onDateRangeChange={orderHooks.setDateRange}
+              disabled={isLoading}
+              className="flex-1"
+            />
           </div>
         </div>
       </div>
