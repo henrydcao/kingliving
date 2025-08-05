@@ -331,28 +331,3 @@ Now, use 5 prompts as shared above
 ```
 
 # Any assumptions you made
-
-1. No real API access was available, so all data was generated using @faker-js/faker to simulate the three regional commerce systems (APAC, UK, US).
-2. Currency conversion was not required across regions. Instead:
-
-- Each region uses its local currency (AUD, GBP, USD).
-
-3. Data consistency was prioritized:
-
-- Orders are only linked to customers within the same region.
-- Each customer ID is unique and region-specific.
-
-4. The UI is intended for internal display only, so features like authentication is not implemented.
-5. Only “Dashboard” is active in the sidebar as per the user story. Other sections (Customers, Reports, Settings) are not included.
-6. Mobile responsiveness was partially considered, but the primary use case assumed a large screen display (e.g., desktop monitor).
-7. Date ranges were kept recent — orders were generated within the last 30 days for realistic recency on the dashboard.
-8. Performance optimizations (e.g., useMemo) were applied assuming potential scale in the future, even though the current dataset is mock and limited.
-
-# Brief reflection on how AI helped/hindered your development process
-
-1. Generate boilerplate code quickly, including TypeScript types, mock data generators, and utility hooks.
-2. Fast suggestions for UI layouts and Tailwind styling, which saved time when building consistent and clean layouts from scratch.
-3. Troubleshoot type issues during hook and component development easily and quickly.
-4. Ui decisions still required my personal ideas, I had to evaluate what made sense for the user and context.
-5. Code reviews were still necessary to optimize, remove uncessary code, type issues, ..
-6. Even though Claude Ai helped me with most of the tasks, but it's required to have a clear understanding what inside the project, data structure, data type, scaffold of the project, .. in order to be able to debug the code.
