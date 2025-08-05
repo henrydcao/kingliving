@@ -8,7 +8,6 @@ import { useDashboardStats } from "./hooks/useDashboardStats";
 import { Sidebar } from "./components/Sidebar";
 import { DashboardStats } from "./components/DashboardStats";
 import { OrderTable } from "./components/OrderTable";
-import { Search } from "./components/Search";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,11 +16,8 @@ function App() {
   const customers = useMemo(() => generateMockCustomers(30), []);
   const orders = useMemo(() => generateMockOrders(customers, 50), [customers]);
 
+  const orderHooks = useOrders(orders);
   const customerHooks = useCustomers(customers, orders);
-  const orderHooks = useOrders({ 
-    orders, 
-    getCustomerById: customerHooks.getCustomerById 
-  });
   const stats = useDashboardStats(orders);
 
   const lastUpdated = useMemo(() => new Date().toLocaleString(), []);
@@ -71,12 +67,6 @@ function App() {
 
         <main className="flex-1 overflow-auto p-4 sm:p-6 space-y-4 sm:space-y-6 bg-gray-50 rounded-tl-2xl">
           <DashboardStats stats={stats} isLoading={isLoading} />
-          <Search
-            searchTerm={orderHooks.searchTerm}
-            onSearchChange={orderHooks.setSearchTerm}
-            isLoading={orderHooks.isSearching && isLoading}
-            className="mb-4 sm:mb-6"
-          />
           <OrderTable
             orders={orderHooks.filteredOrders}
             customerHooks={customerHooks}
